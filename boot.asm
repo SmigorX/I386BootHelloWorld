@@ -5,7 +5,7 @@ start:
     cli                         ; Disable interrupts (optional for simplicity)
     mov dh, 0x00                ; Row 
     mov bh, 0x00                ; Page number (0 for current page)
-    mov bl, 0x00                ; Text and background color 
+    mov bl, 0x01                ; Text and background color 
     call clear_screen
     call clear_loop
     call cursor_setup
@@ -52,8 +52,8 @@ word_print_loop:
 row_runner:
     inc dh
     mov dl, 0x00
-    inc bl                      ; Increment color
-    cmp bl, 0xFF
+    add bl, 0x11                      ; Increment color
+    cmp bl, 0xEF
     jl done
     mov si, msg
     jmp word_print_loop
